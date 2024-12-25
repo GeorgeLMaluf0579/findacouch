@@ -1,21 +1,23 @@
 <template>
   <section>FILTER</section>
   <section>
-    <div class="controls">
-      <button>Refresh</button>
-      <router-link to="/register">Register a Coach</router-link>
-    </div>
-    <ul v-if="hasCoaches">
-      <coach-item
-        v-for="c in filteredCoaches"
-        :id="c.id"
-        :firstName="c.firstName"
-        :lastName="c.lastName"
-        :areas="c.areas"
-        :rate="c.hourlyRate"
-      ></coach-item>
-    </ul>
-    <h3 v-else>No coaches found.</h3>
+    <base-card>
+      <div class="controls">
+        <base-button mode="outline">Refresh</base-button>
+        <base-button link to="/register">Register a Coach</base-button>
+      </div>
+      <ul v-if="hasCoaches">
+        <coach-item
+          v-for="c in filteredCoaches"
+          :id="c.id"
+          :firstName="c.firstName"
+          :lastName="c.lastName"
+          :areas="c.areas"
+          :rate="c.hourlyRate"
+        ></coach-item>
+      </ul>
+      <h3 v-else>No coaches found.</h3>
+    </base-card>
   </section>
 </template>
 
