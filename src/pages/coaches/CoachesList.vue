@@ -1,12 +1,12 @@
 <template>
   <section>
-    <coach-filter @change-filter="setFilters"></coach-filter> 
+    <coach-filter @change-filter="setFilters"></coach-filter>
   </section>
   <section>
     <base-card>
       <div class="controls">
         <base-button mode="outline">Refresh</base-button>
-        <base-button link to="/register">Register a Coach</base-button>
+        <base-button v-if="!isCoach" link to="/register">Register a Coach</base-button>
       </div>
       <ul v-if="hasCoaches">
         <coach-item
@@ -36,36 +36,39 @@ export default {
       activeFilters: {
         backend: true,
         frontend: true,
-        career: true
-      }
-    }
+        career: true,
+      },
+    };
   },
   computed: {
     filteredCoaches() {
       const coaches = this.$store.getters["coaches/coaches"];
-      return coaches.filter(c => {
-        if (this.activeFilters.frontend && c.areas.includes('frontend')) {
+      return coaches.filter((c) => {
+        if (this.activeFilters.frontend && c.areas.includes("frontend")) {
           return true;
         }
-        if (this.activeFilters.backend && c.areas.includes('backend')) {
+        if (this.activeFilters.backend && c.areas.includes("backend")) {
           return true;
         }
-        if (this.activeFilters.career && c.areas.includes('career')) {
+        if (this.activeFilters.career && c.areas.includes("career")) {
           return true;
         }
-        return false
-      })
+        return false;
+      });
     },
     hasCoaches() {
       return this.$store.getters["coaches/hasCoaches"];
     },
+    isCoach() {
+      return this.$store.getters["coaches/isCoach"];
+    },
   },
   methods: {
     setFilters(updatedFilters) {
-      console.log(updatedFilters)
-      this.activeFilters = updatedFilters
-    }
-  }
+      console.log(updatedFilters);
+      this.activeFilters = updatedFilters;
+    },
+  },
 };
 </script>
 

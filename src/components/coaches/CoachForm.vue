@@ -38,6 +38,7 @@
 
 <script>
 export default {
+  emits: ["save-data"],
   data() {
     return {
       firstName: "",
@@ -54,12 +55,11 @@ export default {
         last: this.lastName,
         desc: this.description,
         rate: this.rate,
-        areas: this.areas
-      }
-
-      console.log(formData)
-    }
-  }
+        areas: this.areas,
+      };
+      this.$emit("save-data", formData);
+    },
+  },
 };
 </script>
 
@@ -74,7 +74,7 @@ label {
   margin-bottom: 0.5rem;
 }
 
-input[type='checkbox'] + label {
+input[type="checkbox"] + label {
   font-weight: normal;
   display: inline;
   margin: 0 0 0 0.5rem;
