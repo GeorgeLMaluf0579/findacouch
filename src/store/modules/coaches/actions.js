@@ -12,7 +12,7 @@ export default {
     //Aqui pode ser mudado para axios
 
     const response = await fetch(
-      `https://glm-vue-http-demo-default-rtdb.firebaseio.com/coaches/${userid}.json`,
+      `https://glm-vue-http-demo-default-rtdb.firebaseio.com/coaches/${userId}.json`,
       {
         method: "PUT",
         body: JSON.stringify(coachData),
