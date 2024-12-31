@@ -1,5 +1,3 @@
-import { watch } from "vue";
-
 export default {
   async contactCoach(context, payload) {
     const newRequest = {
@@ -27,15 +25,11 @@ export default {
     context.commit("addRequest", newRequest);
   },
 
-  async fetchRequest(context) {
+  async fetchRequests(context) {
     const coachId = context.rootGetters.userId;
 
     const response = await fetch(
       `https://glm-vue-http-demo-default-rtdb.firebaseio.com/requests/${coachId}.json`,
-      {
-        method: "POST",
-        body: JSON.stringify(newRequest),
-      },
     );
 
     const responseData = await response.json();
@@ -56,6 +50,6 @@ export default {
 
       requests.push(request);
     }
-    context.commit('setRequests', requests)
+    context.commit("setRequests", requests);
   },
 };
