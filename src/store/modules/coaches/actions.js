@@ -9,10 +9,13 @@ export default {
       areas: data.areas,
     };
 
+    const token = context.rootGetters.token;
+
     //Aqui pode ser mudado para axios
 
     const response = await fetch(
-      `https://glm-vue-http-demo-default-rtdb.firebaseio.com/coaches/${userId}.json`,
+      `https://glm-vue-http-demo-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=` +
+        token,
       {
         method: "PUT",
         body: JSON.stringify(coachData),
