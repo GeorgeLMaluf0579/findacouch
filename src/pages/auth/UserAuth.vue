@@ -13,9 +13,9 @@
         Please enter a valid email and password (must be at least 6 chars long).
       </p>
       <base-button>{{ submitButtonCaption }}</base-button>
-      <base-button type="button" mode="flat" @click="switchAuthMode"
-      >{{ switchModeButtonCaption }}</base-button
-      >
+      <base-button type="button" mode="flat" @click="switchAuthMode">{{
+        switchModeButtonCaption
+      }}</base-button>
     </form>
   </base-card>
 </template>
@@ -32,21 +32,20 @@ export default {
   },
   computed: {
     submitButtonCaption() {
-      if (this.mode === 'login') {
-        return 'Login'
+      if (this.mode === "login") {
+        return "Login";
       } else {
-        return 'Signup'
+        return "Signup";
       }
     },
 
     switchModeButtonCaption() {
-      if (this.mode === 'login') {
-        return 'Signup instead'
+      if (this.mode === "login") {
+        return "Signup instead";
       } else {
-        return 'Login instead'
+        return "Login instead";
       }
-
-    }
+    },
   },
   methods: {
     submitForm() {
@@ -59,7 +58,15 @@ export default {
         this.formIsValid = false;
         return;
       }
-      //send the http request...
+
+      if (this.mode === "login") {
+        // ...
+      } else {
+        this.$store.dispatch("signup", {
+          email: this.email,
+          password: this.password,
+        });
+      }
     },
     switchAuthMode() {
       if (this.mode === "login") {
@@ -67,7 +74,6 @@ export default {
       } else {
         this.mode = "login";
       }
-
     },
   },
 };
