@@ -1,6 +1,13 @@
 export const API_KEY = "AIzaSyBsb_GAppuf1DeakY9kTHXZmqRQbPRsmuI";
 
 export default {
+  logout(context) {
+    context.commit("setUser", {
+      userId: null,
+      tokenExpiration: null,
+      token: null,
+    });
+  },
   async login(context, payload) {
     const response = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
@@ -28,7 +35,6 @@ export default {
       userId: responseData.localId,
       tokenExpiration: responseData.expiresIn,
     });
-
   },
   async signup(context, payload) {
     const response = await fetch(

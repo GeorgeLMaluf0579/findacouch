@@ -8,6 +8,9 @@
           <router-link to="/requests">Requests</router-link>
         </li>
         <li v-else><router-link to="/auth">Login</router-link></li>
+        <li v-if="isLoggedIn">
+          <base-button @click="logOut">Logout</base-button>
+        </li>
       </ul>
     </nav>
   </header>
@@ -19,6 +22,11 @@ export default {
       return this.$store.getters.isAuthenticated;
     },
   },
+  methods: {
+    logOut() {
+      this.$store.dispatch("logout")
+    }
+  }
 };
 </script>
 
